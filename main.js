@@ -1,3 +1,12 @@
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+
+var recognition = new SpeechRecognition();
+recognition.continuous = false;
+recognition.lang = 'en-IN';
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+
 var currentSongNumber = 1;
 var willLoop = 0;
 var willShuffle = 0;
@@ -61,7 +70,7 @@ function toggleSong() {
   var song = document.querySelector('audio');
   if(song.paused) {
     $('.play-icon').removeClass('fa-play').addClass('fa-pause');  // If the song is paused, start playing it
-  song.play();                                                    // and change the icon of Toggle button.
+    song.play();                                                  // and change the icon of Toggle button.
   }
   else {
     $('.play-icon').removeClass('fa-pause').addClass('fa-play');  // If the song is playing, pause it
@@ -237,3 +246,18 @@ $('.fa-step-backward').on('click', function() {
     changeCurrentSongDetails(songs[currentSongNumber - 1]);
   }
 });
+
+// The following code is meant to use the Web Speech API.
+$('.fa-microphone').on('click', function() {
+  recognition.start();
+  console.log('Started!');
+});
+
+recognition.onresult = function(event) {
+  console.log('onresult running!');
+  toggleSong();
+};
+
+recognition.onspeechend = function() {
+  recognition.stop();
+};
