@@ -256,15 +256,17 @@ $('.fa-microphone').on('click', function() {
 recognition.onresult = function(event) {
   var last = event.results.length - 1;
   var transcript = event.results[last][0].transcript;
-  alert(transcript);
+  // alert(transcript);
   var song = document.querySelector('audio');
   if(song.paused===true && transcript.toUpperCase() === 'PLAY') {
+    // $('.player-progress').hide();
     $('.play-icon').removeClass('fa-play').addClass('fa-pause');
     song.play();
     // alert("Is paused: " + song.paused);
     console.log("Is paused: " + song.paused);
   }
   else if(transcript.toUpperCase() === 'PAUSE') {
+    // $('.player-progress').show();
     $('.play-icon').removeClass('fa-pause').addClass('fa-play');
     song.pause();
     // alert("Is paused: " + song.paused);
