@@ -7,6 +7,7 @@ recognition.lang = 'en-IN';
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
+
 var currentSongNumber = 1;
 var willLoop = 0;
 var willShuffle = 0;
@@ -254,8 +255,18 @@ $('.fa-microphone').on('click', function() {
 });
 
 recognition.onresult = function(event) {
-  console.log('onresult running!');
-  toggleSong();
+  var last = event.results.length - 1;
+  var transcript = event.results[last][0].transcript;
+  // alert(transcript);
+  var song = document.querySelector('audio');
+  if(transcript.toUpperCase() === 'PLAY') {
+    $('.play-icon').removeClass('fa-play').addClass('fa-pause');  // If the song is paused, start playing it
+    song.play();                                                  // and change the icon of Toggle button.
+  }
+  else if(transcript.toUpperCase() === 'PAUSE') {
+    $('.play-icon').removeClass('fa-pause').addClass('fa-play');  // If the song is playing, pause it
+    song.pause();                                                 // and change the icon of Toggle button.
+  }
 };
 
 recognition.onspeechend = function() {
