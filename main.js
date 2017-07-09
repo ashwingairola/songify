@@ -258,15 +258,17 @@ recognition.onresult = function(event) {
   var transcript = event.results[last][0].transcript;
   alert(transcript);
   var song = document.querySelector('audio');
-  if(song.paused && transcript.toUpperCase() === 'PLAY') {
+  if(song.paused===true && transcript.toUpperCase() === 'PLAY') {
     $('.play-icon').removeClass('fa-play').addClass('fa-pause');
     song.play();
-    alert("Is paused: " + song.paused);
+    // alert("Is paused: " + song.paused);
+    console.log("Is paused: " + song.paused);
   }
   else if(transcript.toUpperCase() === 'PAUSE') {
     $('.play-icon').removeClass('fa-pause').addClass('fa-play');
     song.pause();
-    alert("Is paused: " + song.paused);
+    // alert("Is paused: " + song.paused);
+    console.log("Is paused: " + song.paused);
   }
 };
 
