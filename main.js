@@ -247,6 +247,25 @@ $('.fa-step-backward').on('click', function() {
   }
 });
 
+// Jump to the first song.
+$('.fa-fast-backward').on('click', function() {
+  skipToFirstOrLastSong('first');
+});
+
+// Jump to the last song.
+$('.fa-fast-forward').on('click', function() {
+  skipToFirstOrLastSong('last');
+});
+
+// Common code for jumping to the first or the last song.
+function skipToFirstOrLastSong(index) { // index is the value received through the click events.
+  var audio = document.querySelector('audio');
+  currentSongNumber = (index === 'first') ? 1 : songs.length; // If index === 'first' then play first song, else the last one.
+  audio.src = songs[currentSongNumber - 1].fileName;
+  toggleSong();
+  changeCurrentSongDetails(songs[currentSongNumber - 1]);
+}
+
 // The following code is meant to use the Web Speech API.
 $('.fa-microphone').on('click', function() {
   recognition.start();
@@ -258,7 +277,7 @@ recognition.onresult = function(event) {
   var transcript = event.results[last][0].transcript;
   // alert(transcript);
   var song = document.querySelector('audio');
-  if(song.paused===true && transcript.toUpperCase() === 'PLAY') {
+  if(song.paused && transcript.toUpperCase() === 'PLAY') {
     // $('.player-progress').hide();
     $('.play-icon').removeClass('fa-play').addClass('fa-pause');
     song.play();
