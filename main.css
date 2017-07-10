@@ -191,6 +191,45 @@ body {
 
 }
 
+.volume-controls {
+  display: flex;
+  align-items: center;
+}
+
+.player-slider {
+  -webkit-appearance: none;
+  height: 8px;
+  width: 100px !important;
+  background-color: #3d3d3d;
+  border-radius: 4px;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #3d3d3d;
+  cursor: pointer;
+}
+
+input[type=range] {
+  outline: none;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
 .content {
     position: relative;
 }

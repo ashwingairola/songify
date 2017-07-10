@@ -266,6 +266,12 @@ function skipToFirstOrLastSong(index) { // index is the value received through t
   changeCurrentSongDetails(songs[currentSongNumber - 1]);
 }
 
+// Code for the volume slider.
+$('.player-slider').on('change', function() {
+  var audio = document.querySelector('audio');
+  audio.volume = this.value;
+});
+
 // The following code is meant to use the Web Speech API.
 $('.fa-microphone').on('click', function() {
   recognition.start();
