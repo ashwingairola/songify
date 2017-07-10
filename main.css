@@ -139,6 +139,15 @@ body {
     border-color: #000;
 }
 
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-controls {
+  margin-left: -7rem;
+}
+
 .player-buttons {
     display:flex;
     font-size: 1.5rem;
@@ -194,6 +203,8 @@ body {
 .volume-controls {
   display: flex;
   align-items: center;
+  margin-top: 1.5rem;
+  margin-right: 4rem;
 }
 
 .player-slider {
@@ -234,10 +245,10 @@ input[type=range]::-ms-track {
     position: relative;
 }
 .current-song-wrapper {
-    position: absolute;
     bottom: 0;
     display: flex;
-    width: 300px
+    width: 300px;
+    margin-left: 1rem;
 }
 
 .current-song-image {
@@ -254,7 +265,6 @@ input[type=range]::-ms-track {
 }
 
 .current-song-album {
-    margin-top: 0.4rem;
     overflow: hidden;
     height: 1rem;
 }
