@@ -4,10 +4,11 @@ html {
 
 body {
   color: white;
+  padding-top: 40px;
+  padding-bottom: 80px;
 }
 
-.col-md-2, .col-md-8 {
-  background-color: pink;
+.col-md-2, .col-md-10 {
   height: 600px;
 }
 
@@ -50,8 +51,7 @@ body {
 #header {                   /* Styles for the header inside the main column */
   background-color: #302f2f;
   border: none;
-  position: fixed;
-  width: 100%;
+  border-bottom: 1px solid #000;
   border-radius: 0;
   max-height: 43px;
   min-height: 43px;
