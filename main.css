@@ -339,6 +339,10 @@ table.dataTable tbody tr {
 background-color: initial;
 }
 
+#songs {
+  width: 100%;
+}
+
 #songs_info {
 display: none;
 }

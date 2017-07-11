@@ -17,28 +17,32 @@ var songs = [
     'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
     'album': 'Badrinath ki Dulhania',
     'duration': '2:56',
-    'fileName': 'song1.mp3'
+    'fileName': 'song1.mp3',
+    'image' : 'badri.jpg'
   },
   {
     'name': 'Humma Song',
     'artist': 'Badshah, Jubin Nautiyal, Shashaa Tirupati',
     'album': 'Ok Jaanu',
     'duration': '3:15',
-    'fileName': 'song2.mp3'
+    'fileName': 'song2.mp3',
+    'image' : 'humma.jpg'
   },
   {
     'name': 'Nashe Si Chadh Gayi',
     'artist': 'Arijit Singh',
     'album': 'Befikre',
     'duration': '2:34',
-    'fileName': 'song3.mp3'
+    'fileName': 'song3.mp3',
+    'image' : 'befikre.jpg'
   },
   {
     'name': 'The Breakup Song',
     'artist': 'Nakash Aziz, Arijit Singh, Badshah, Jonita Gandhi',
     'album': 'Ae Dil Hai Mushkil',
     'duration': '2:29',
-    'fileName': 'song4.mp3'
+    'fileName': 'song4.mp3',
+    'image' : 'mushkil.jpg'
   }
 ];
 
@@ -150,6 +154,7 @@ function addSongNameClickEvent(song, position) {
 function changeCurrentSongDetails(song) {
   $('.current-song-name').text(song.name);
   $('.current-song-album').text(song.album);
+  $('.current-song-image').attr('src', 'img/' + song.image);
 }
 
 // Updates the progress bar of the player as the song progresses with time.
