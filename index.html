@@ -10,143 +10,156 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-      <header>
-        <nav class="navbar navbar-default navbar-fixed-top" id="header">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <!-- <a class="navbar-brand" href="#">Brand</a> -->
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <form class="navbar-form navbar-left">
-                <div class="input-group" id="search-box">
-                  <span class="input-group-addon" id="basic-addon1"><span class="fa fa-search"></span></span>
-                  <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
-                </div>
-              </form>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">ashwingairola</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
-      </header>
-
-      <div class="row">
-        <div class="col-md-2" id="menu">
-          <ul class="nav nav-pills nav-stacked">
-            <li role="presentation"><a href="#">Recently Played</a></li>
-            <li role="presentation" class="active"><a href="#">Songs</a></li>
-            <li role="presentation"><a href="#">Albums</a></li>
-            <li role="presentation"><a href="#">Artists</a></li>
-            <li role="presentation"><a href="#">Stations</a></li>
-            <li role="presentation"><a href="#">Local Files</a></li>
-          </ul>
-        </div>
-        <div class="col-md-10" id="main">
-
-
-          <div class="jumbotron">
-            <h1>Songs</h1>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">PLAY</a></p>
-          </div>
-
-          <section class="content">
-            <audio src="song1.mp3"></audio>
-            <table id="songs">
-              <thead class="list-headers">
-                <tr>
-                  <td> TITLE </td>
-                  <td> ARTIST </td>
-                  <td> ALBUM </td>
-                  <td> <span class="fa fa-calendar-plus-o"></span> </td>
-                </tr>
-              </thead>
-              <!-- <div class="song-list"> -->
-                <tbody>
-                  <tr class="song" id="song1">
-                    <td class="song-name"></td>
-                    <td class="song-artist"></td>
-                    <td class="song-album"></td>
-                    <td class="song-length"></td>
-                  </tr>
-                  <tr class="song" id="song2">
-                    <td class="song-name"></td>
-                    <td class="song-artist"></td>
-                    <td class="song-album"></td>
-                    <td class="song-length"></td>
-                  </tr>
-                  <tr class="song" id="song3">
-                    <td class="song-name"></td>
-                    <td class="song-artist"></td>
-                    <td class="song-album"></td>
-                    <td class="song-length"></td>
-                  </tr>
-                  <tr class="song" id="song4">
-                    <td class="song-name"></td>
-                    <td class="song-artist"></td>
-                    <td class="song-album"></td>
-                    <td class="song-length"></td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- </div> -->
-          </section>
-        </div>
+    <section class="welcome-screen">
+      <div class="input-wrapper">
+        <h1> Welcome to Songify </h1>
+        <h3> Please login to access your account </h3>
+        <form action="javascript: void(0)">
+          <input type="text" placeholder="Name" id="name-input" required>
+          <input type="email" placeholder="Email (test@acadview.com)" id="email-input" required>
+          <input type="password" placeholder="Password (JavascriptRocks)" id="password-input" required>
+          <button> Login </button>
+        </form>
       </div>
-      <nav class="navbar navbar-default navbar-fixed-bottom" id="footer">
-        <div class="controls">
-          <div class="current-song-wrapper">
-            <img src="img/song1.jpg" class="current-song-image">
-            <div>
-              <p class="current-song-name"></p>
-              <p class="current-song-album"></p>
-            </div>
-          </div>
-          <div class="main-controls">
-            <div class="player-buttons">
-              <i class="fa fa-random clickable disabled" aria-hidden="true"></i>
-              <i class="fa fa-fast-backward clickable" aria-hidden="true"></i>
-              <i class="fa fa-step-backward clickable" aria-hidden="true"></i>
-              <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
-              <i class="fa fa-step-forward clickable" aria-hidden="true"></i>
-              <i class="fa fa-fast-forward clickable" aria-hidden="true"></i>
-              <i class="fa fa-repeat disabled clickable" aria-hidden="true"></i>
-              <i class="fa fa-microphone clickable" aria-hidden="true"></i>
-            </div>
-            <div class="progress-wrapper">
-              <span class="time-elapsed"> </span>
-              <div class="player-progress">
-                <div class="progress-filled"> </div>
+    </section>
+    <div class="container-fluid">
+
+      <div class="main hidden">
+        <header>
+          <nav class="navbar navbar-default navbar-fixed-top" id="header">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <!-- <a class="navbar-brand" href="#">Brand</a> -->
               </div>
-              <span class="song-duration"></span>
-            </div>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <form class="navbar-form navbar-left">
+                  <div class="input-group" id="search-box">
+                    <span class="input-group-addon" id="basic-addon1"><span class="fa fa-search"></span></span>
+                    <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+                  </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#">ashwingairola</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        </header>
+
+        <div class="row">
+          <div class="col-md-2" id="menu">
+            <ul class="nav nav-pills nav-stacked">
+              <li role="presentation"><a href="#">Recently Played</a></li>
+              <li role="presentation" class="active"><a href="#">Songs</a></li>
+              <li role="presentation"><a href="#">Albums</a></li>
+              <li role="presentation"><a href="#">Artists</a></li>
+              <li role="presentation"><a href="#">Stations</a></li>
+              <li role="presentation"><a href="#">Local Files</a></li>
+            </ul>
           </div>
-          <div class="volume-controls">
-            <i class="fa fa-volume-up clickable" aria-hidden="true" id="volume-button"></i>
-            <input type="range" name="volume" class="player-slider" min="0" max="1" step="0.05" value="1">
+          <div class="col-md-10" id="main">
+            <div class="jumbotron">
+              <h1>Songs</h1>
+              <p><a class="btn btn-primary btn-lg" href="#" role="button">PLAY</a></p>
+            </div>
+
+            <section class="content">
+              <audio src="song1.mp3"></audio>
+              <table id="songs">
+                <thead class="list-headers">
+                  <tr>
+                    <td> TITLE </td>
+                    <td> ARTIST </td>
+                    <td> ALBUM </td>
+                    <td> <span class="fa fa-calendar-plus-o"></span> </td>
+                  </tr>
+                </thead>
+                <!-- <div class="song-list"> -->
+                  <tbody>
+                    <tr class="song" id="song1">
+                      <td class="song-name"></td>
+                      <td class="song-artist"></td>
+                      <td class="song-album"></td>
+                      <td class="song-length"></td>
+                    </tr>
+                    <tr class="song" id="song2">
+                      <td class="song-name"></td>
+                      <td class="song-artist"></td>
+                      <td class="song-album"></td>
+                      <td class="song-length"></td>
+                    </tr>
+                    <tr class="song" id="song3">
+                      <td class="song-name"></td>
+                      <td class="song-artist"></td>
+                      <td class="song-album"></td>
+                      <td class="song-length"></td>
+                    </tr>
+                    <tr class="song" id="song4">
+                      <td class="song-name"></td>
+                      <td class="song-artist"></td>
+                      <td class="song-album"></td>
+                      <td class="song-length"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- </div> -->
+            </section>
           </div>
         </div>
-      </nav>
+        <nav class="navbar navbar-default navbar-fixed-bottom" id="footer">
+          <div class="controls">
+            <div class="current-song-wrapper">
+              <img src="img/song1.jpg" class="current-song-image">
+              <div>
+                <p class="current-song-name"></p>
+                <p class="current-song-album"></p>
+              </div>
+            </div>
+            <div class="main-controls">
+              <div class="player-buttons">
+                <i class="fa fa-random clickable disabled" aria-hidden="true"></i>
+                <i class="fa fa-fast-backward clickable" aria-hidden="true"></i>
+                <i class="fa fa-step-backward clickable" aria-hidden="true"></i>
+                <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
+                <i class="fa fa-step-forward clickable" aria-hidden="true"></i>
+                <i class="fa fa-fast-forward clickable" aria-hidden="true"></i>
+                <i class="fa fa-repeat disabled clickable" aria-hidden="true"></i>
+                <i class="fa fa-microphone clickable" aria-hidden="true"></i>
+              </div>
+              <div class="progress-wrapper">
+                <span class="time-elapsed"> </span>
+                <div class="player-progress">
+                  <div class="progress-filled"> </div>
+                </div>
+                <span class="song-duration"></span>
+              </div>
+            </div>
+            <div class="volume-controls">
+              <i class="fa fa-volume-up clickable" aria-hidden="true" id="volume-button"></i>
+              <input type="range" name="volume" class="player-slider" min="0" max="1" step="0.05" value="1">
+            </div>
+          </div>
+        </nav>
+      </div>
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="jquery.js"></script>

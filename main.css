@@ -1,11 +1,66 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 html {
   font-size: 16px;
 }
 
 body {
   color: white;
-  padding-top: 40px;
-  padding-bottom: 80px;
+}
+
+.welcome-screen h1,h2,h3,h4,h5,h6 {
+  color: #fff;
+}
+
+.welcome-screen button {
+  background-color: #1db954;
+  border: none;
+  color: #fff;
+}
+
+.welcome-screen {
+  overflow: auto;
+  position: relative;
+  text-align: center;
+}
+
+.welcome-screen:before {
+
+  content: "";
+  position: fixed;
+  z-index: -1;
+
+  display: block;
+  background-image: url('img/login_background.jpg');
+  background-size: cover;
+  width: 110%;
+  height: 110%;
+  left: -5%;
+  top: -5%;
+
+  -webkit-filter: blur(5px) grayscale(100%);
+  -moz-filter: blur(5px) grayscale(100%);
+  -o-filter: blur(5px) grayscale(100%);
+  -ms-filter: blur(5px) grayscale(100%);
+  filter: blur(5px) grayscale(100%);
+}
+
+.input-wrapper {
+  color: #000;
+  align-items: center;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.input-wrapper button, .input-wrapper input {
+  display: block;
+  width: 25rem;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 .col-md-2, .col-md-10 {
