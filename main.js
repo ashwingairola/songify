@@ -44,7 +44,9 @@ var songs = [
 
 $('.welcome-screen button').on('click', function() {
   var name = $('#name-input').val();
-  if(name.length > 2) {
+  var email = $('#email-input').val();
+  var password = $('#password-input').val();
+  if(name.length > 2 && email === 'test@acadview.com' && password === 'JavascriptRocks') {
     var message = "Welcome, " + name;
     $('.main .user-name').text(message);
     $('.welcome-screen').addClass('hidden');
@@ -52,6 +54,7 @@ $('.welcome-screen button').on('click', function() {
   }
   else {
     $('#name-input').addClass('error');
+    $('.alert-danger').removeClass('hidden');
   }
 });
 

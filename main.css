@@ -63,6 +63,16 @@ body {
   padding: 10px;
 }
 
+.error {
+  border: 1px solid red;
+}
+
+.alert-danger {
+  width: 25rem;
+  margin: 0 auto;
+  bottom: 0;
+}
+
 .col-md-2, .col-md-10 {
   height: 600px;
 }
