@@ -134,6 +134,7 @@ function addSongNameClickEvent(song, position) {
   var songId = '#song' + position;
   var fileName = song.fileName;
   $(songId).on('click', function() {
+    currentSongNumber = (position > 0 && position <= songs.length) ? position : ((position > songs.length) ? songs.length : 1);
     var audio = document.querySelector('audio');
     if(audio.src.search(fileName) != -1) {
       toggleSong();
