@@ -13,7 +13,7 @@ var willShuffle = 0;
 
 var songs = [
   {
-    'name': 'Badri Ki Dulhania (Title Track)',
+    'name': 'Tamma Tamma Again',
     'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
     'album': 'Badrinath ki Dulhania',
     'duration': '2:56',
@@ -55,6 +55,8 @@ $('.welcome-screen button').on('click', function() {
     $('.user-name a').text(message);
     $('.welcome-screen').addClass('hidden');
     $('.main').removeClass('hidden');
+    $('body').css('padding-top', '40px');
+    $('body').css('padding-bottom', '80px');
   }
   else {
     $('#name-input').addClass('error');
@@ -311,3 +313,26 @@ recognition.onresult = function(event) {
 recognition.onspeechend = function() {
   recognition.stop();
 };
+
+// Code to play local files.
+var jsmediatags = window.jsmediatags; // Instantiate a jsmediatags object
+
+$('#my-file').on('change', function(event) {  // Triggered whenever we choose a file
+  var file = event.target.files[0];           // Select the first file from all the files we have selected
+  var reader = new FileReader();              // Instantiate a FileReader object
+  $(reader).on('load', function() {
+    var audio = document.querySelector('audio');
+    audio.src = this.result;                  // Set the audio's source to the result of the event
+    toggleSong();                             // Play the song
+  });
+  reader.readAsDataURL(file);                 // The file is to be read as a URL
+
+  // The following code is meant to extract the audio metadata from the selected local file.
+  jsmediatags.read(file, {
+    onSuccess: function(tag) {    // onSuccess triggers in the event of a successful reading operation, as opposed to onError.
+      document.querySelector('.current-song-album').innerHTML = tag.tags.album;   // Set the album name
+      document.querySelector('.current-song-name').innerHTML = tag.tags.title;    // Set the song title
+      document.querySelector('.current-song-image').setAttribute('src', 'img/generic.svg'); //Set a generic music icon in place of an album cover
+    }
+  });
+});
