@@ -48,7 +48,7 @@ $('.welcome-screen button').on('click', function() {
   var password = $('#password-input').val();
   if(name.length > 2 && email === 'test@acadview.com' && password === 'JavascriptRocks') {
     var message = "Welcome, " + name;
-    $('.main .user-name').text(message);
+    $('.user-name a').text(message);
     $('.welcome-screen').addClass('hidden');
     $('.main').removeClass('hidden');
   }
