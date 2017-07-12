@@ -69,8 +69,9 @@ $('.play-icon').on('click', function() {
 });
 
 $('body').on('keypress', function(event) {
-  if(event.keyCode == 32 && event.target.tagName != 'INPUT')
+  if(event.keyCode == 32 && event.target.tagName != 'INPUT') {
     toggleSong();
+  }
 });
 
 // This function toggles the audio, regardless of how the song is toggled,
@@ -97,8 +98,23 @@ function updateCurrentTime() {
 }
 
 $(document).ready(function() {
-  changeCurrentSongDetails(songs[0]);
-  for(var i=0; i<songs.length; ++i) {
+  if(!localStorage.getItem('name')) {     // If there is no song data previously stored in the browser's local storage...
+    changeCurrentSongDetails(songs[0]);   // Load the details of the first song to the player controls.
+    console.log('Local storage failed.');
+  }
+  else {                                  // If there is song data saved on the local storage...
+    console.log('Accessing storage...');
+    var audio = document.querySelector('audio');
+    // Access the various items in the local storage and assign their values appropriately.
+    currentSongNumber = localStorage.getItem('current-song-number');
+    audio.src = localStorage.getItem('fileName');
+    audio.currentTime = localStorage.getItem('current-time');
+    $('.current-song-name').text(localStorage.getItem('name'));
+    $('.current-song-album').text(localStorage.getItem('album'));
+    $('.current-song-image').attr('src', 'img/' + localStorage.getItem('image'));
+  }
+
+  for(var i=0; i<songs.length; ++i) {   // Populate the playlist table.
     var obj = songs[i];
     var name = '#song' + (i+1);
     var song = $(name);
@@ -243,7 +259,7 @@ $('.fa-step-forward').on('click', function() {
 // Code for the 'Previous' button.
 $('.fa-step-backward').on('click', function() {
   var audio = document.querySelector('audio');
-  if(currentSongNumber >= 1) {
+  if(currentSongNumber > 1) {
     currentSongNumber--;
     var prevSongObj = songs[currentSongNumber - 1];
     audio.src = prevSongObj.fileName;
@@ -335,4 +351,29 @@ $('#my-file').on('change', function(event) {  // Triggered whenever we choose a 
       document.querySelector('.current-song-image').setAttribute('src', 'img/generic.svg'); //Set a generic music icon in place of an album cover
     }
   });
+});
+
+function saveSong() {
+  if(typeof(Storage) !== undefined) {
+    var audio = document.querySelector('audio');
+    var songObj = songs[currentSongNumber - 1];
+    localStorage.setItem('name', songObj.name);
+    localStorage.setItem('album', songObj.album);
+    localStorage.setItem('artist', songObj.artist);
+    localStorage.setItem('duration', songObj.duration);
+    localStorage.setItem('fileName', songObj.fileName);
+    localStorage.setItem('image', songObj.image);
+    localStorage.setItem('current-time', audio.currentTime);
+    localStorage.setItem('current-song-number', currentSongNumber);
+    console.log(audio.currentTime);
+  }
+  else {
+    console.log('Web Storage not supported.');
+  }
+}
+
+$(window).on('unload', function() {
+  console.log('Saving song...');
+  saveSong();
+  console.log('Song saved!');
 });
