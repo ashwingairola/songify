@@ -299,6 +299,13 @@ $('.player-slider').on('change', function() {
   audio.volume = this.value;
 });
 
+// Code to mute and unmute the audio.
+$('#volume-toggle').on('click', function() {
+  $('#volume-toggle').toggleClass('fa-volume-up').toggleClass('fa-volume-off');
+  var audio = document.querySelector('audio');
+  audio.muted = !audio.muted;
+});
+
 // The following code is meant to use the Web Speech API.
 $('.fa-microphone').on('click', function() {
   recognition.start();
@@ -365,7 +372,6 @@ function saveSong() {
     localStorage.setItem('image', songObj.image);
     localStorage.setItem('current-time', audio.currentTime);
     localStorage.setItem('current-song-number', currentSongNumber);
-    console.log(audio.currentTime);
   }
   else {
     console.log('Web Storage not supported.');

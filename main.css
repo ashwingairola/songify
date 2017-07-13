@@ -272,6 +272,10 @@ body {
   margin-right: 4rem;
 }
 
+#volume-toggle {
+  font-size: 20px;
+}
+
 .player-slider {
   -webkit-appearance: none;
   height: 8px;

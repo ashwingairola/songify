@@ -10,7 +10,7 @@
   </head>
 
   <body>
-    <section class="welcome-screen">
+    <section class="welcome-screen hidden">
       <div class="input-wrapper">
         <h1> Welcome to Songify </h1>
         <h3> Please login to access your account </h3>
@@ -27,7 +27,7 @@
       </div>
     </section>
     <div class="container-fluid">
-      <div class="main hidden">
+      <div class="main">
         <header>
           <nav class="navbar navbar-default navbar-fixed-top" id="header">
             <div class="container-fluid">
@@ -177,7 +177,7 @@
               </div>
             </div>
             <div class="volume-controls">
-              <i class="fa fa-volume-up clickable" aria-hidden="true" id="volume-button"></i>
+              <i class="fa fa-volume-up clickable" aria-hidden="true" id="volume-toggle"></i>
               <input type="range" name="volume" class="player-slider" min="0" max="1" step="0.05" value="1">
             </div>
           </div>
