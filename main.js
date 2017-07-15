@@ -118,6 +118,7 @@ $(document).ready(function() {
     var obj = songs[i];
     var name = '#song' + (i+1);
     var song = $(name);
+    song.find('.song-number').text(i+1);
     song.find('.song-name').text(obj.name);
     song.find('.song-artist').text(obj.artist);
     song.find('.song-album').text(obj.album);

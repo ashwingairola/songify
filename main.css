@@ -343,7 +343,7 @@ table.dataTable tbody tr {
 background-color: initial;
 }
 
-#songs {
+.dataTable.no-footer#songs {
   width: 100%;
 }
 
