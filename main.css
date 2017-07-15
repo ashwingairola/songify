@@ -268,7 +268,7 @@ body {
 .volume-controls {
   display: flex;
   align-items: center;
-  margin-top: 1.5rem;
+  margin-top: 0.8rem;
   margin-right: 4rem;
 }
 

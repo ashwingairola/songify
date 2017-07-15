@@ -98,12 +98,12 @@ function updateCurrentTime() {
 }
 
 $(document).ready(function() {
+  $('#num-of-songs').text(songs.length);
+
   if(!localStorage.getItem('name')) {     // If there is no song data previously stored in the browser's local storage...
     changeCurrentSongDetails(songs[0]);   // Load the details of the first song to the player controls.
-    console.log('Local storage failed.');
   }
   else {                                  // If there is song data saved on the local storage...
-    console.log('Accessing storage...');
     var audio = document.querySelector('audio');
     // Access the various items in the local storage and assign their values appropriately.
     currentSongNumber = localStorage.getItem('current-song-number');
