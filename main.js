@@ -11,38 +11,82 @@ var currentSongNumber = 1;
 var willLoop = 0;
 var willShuffle = 0;
 
-var songs = [
+var songs;  // A generic container for playlists.
+
+var playlists = [
   {
-    'name': 'Tamma Tamma Again',
-    'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
-    'album': 'Badrinath ki Dulhania',
-    'duration': '2:56',
-    'fileName': 'song1.mp3',
-    'image' : 'badri.jpg'
+    'playlistName': 'Bollywood',
+    'playlist': [
+      {
+        'name': 'Tamma Tamma Again',
+        'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
+        'album': 'Badrinath ki Dulhania',
+        'duration': '2:56',
+        'fileName': 'song1.mp3',
+        'image': 'badri.jpg'
+      },
+      {
+        'name': 'Humma Song',
+        'artist': 'Badshah, Jubin Nautiyal, Shashaa Tirupati',
+        'album': 'Ok Jaanu',
+        'duration': '3:15',
+        'fileName': 'song2.mp3',
+        'image': 'humma.jpg'
+      },
+      {
+        'name': 'Nashe Si Chadh Gayi',
+        'artist': 'Arijit Singh',
+        'album': 'Befikre',
+        'duration': '2:34',
+        'fileName': 'song3.mp3',
+        'image': 'befikre.jpg'
+      },
+      {
+        'name': 'The Breakup Song',
+        'artist': 'Nakash Aziz, Arijit Singh, Badshah, Jonita Gandhi',
+        'album': 'Ae Dil Hai Mushkil',
+        'duration': '2:29',
+        'fileName': 'song4.mp3',
+        'image': 'mushkil.jpg'
+      }
+    ]
   },
   {
-    'name': 'Humma Song',
-    'artist': 'Badshah, Jubin Nautiyal, Shashaa Tirupati',
-    'album': 'Ok Jaanu',
-    'duration': '3:15',
-    'fileName': 'song2.mp3',
-    'image' : 'humma.jpg'
-  },
-  {
-    'name': 'Nashe Si Chadh Gayi',
-    'artist': 'Arijit Singh',
-    'album': 'Befikre',
-    'duration': '2:34',
-    'fileName': 'song3.mp3',
-    'image' : 'befikre.jpg'
-  },
-  {
-    'name': 'The Breakup Song',
-    'artist': 'Nakash Aziz, Arijit Singh, Badshah, Jonita Gandhi',
-    'album': 'Ae Dil Hai Mushkil',
-    'duration': '2:29',
-    'fileName': 'song4.mp3',
-    'image' : 'mushkil.jpg'
+    'playlistName': 'Grammys',
+    'playlist': [
+      {
+        'name': 'Swag Waali Topi',
+        'artist': 'Dhinchak Pooja',
+        'album': 'Pooja\'s Greatest Hits',
+        'duration': '2:56',
+        'fileName': 'Swag Waali Topi.mp3',
+        'image': 'swag.jpg'
+      },
+      {
+        'name': 'Swag Waali Topi',
+        'artist': 'Dhinchak Pooja',
+        'album': 'Pooja\'s Greatest Hits',
+        'duration': '2:56',
+        'fileName': 'Swag Waali Topi.mp3',
+        'image': 'swag.jpg'
+      },
+      {
+        'name': 'Swag Waali Topi',
+        'artist': 'Dhinchak Pooja',
+        'album': 'Pooja\'s Greatest Hits',
+        'duration': '2:56',
+        'fileName': 'Swag Waali Topi.mp3',
+        'image': 'swag.jpg'
+      },
+      {
+        'name': 'Swag Waali Topi',
+        'artist': 'Dhinchak Pooja',
+        'album': 'Pooja\'s Greatest Hits',
+        'duration': '2:56',
+        'fileName': 'Swag Waali Topi.mp3',
+        'image': 'swag.jpg'
+      }
+    ]
   }
 ];
 
@@ -97,7 +141,49 @@ function updateCurrentTime() {
   $('.song-duration').text(duration);
 }
 
+// The following code runs when the user clicks on a playlist's name in the menu.
+// It is meant to load a playlist from the menu.
+$('.playlist').on('click', function() {
+  var audio = document.querySelector('audio');
+  console.log(audio.src);
+  var playlistName = this.innerHTML;    // Get the playlist's name from the menu.
+  var playlist = searchForPlayList(playlistName); // Search the playlists array for the given playlist.
+  songs = playlist;   // Assign the retreived playlist object to the songs variable.
+  audio.src = songs[0].fileName;  // Set the audio's source to the fileName of the first song in the playlist.
+  audio.load();
+  console.log(songs[0].fileName);
+  changeCurrentSongDetails(songs[0]);   // Update the player controls with the first song's details.
+  loadPlaylist();   // Load the playlist (populate the DataTable with data in the songs variable).
+});
+
+// Search for the playlistName selected from the menu and return the actual playlist object associated with it.
+function searchForPlayList(playlistName) {
+  for(var i=0; i<playlists.length; ++i) {   // For every playlist in the playlists array...
+    if(playlistName === playlists[i].playlistName) {  // If the name of the playlist selected is the same as that of the current playlist object...
+      return playlists[i].playlist;   // Return the current playlist object.
+    }
+  }
+  return playlists[0].playlist;   // Otherwise simply return the first playlist.
+}
+
+// Meant to populate the DataTable with the data from the retreived playlist object.
+function loadPlaylist() {
+  for(var i=0; i<songs.length; ++i) {   // Populate the playlist table.
+    var obj = songs[i];
+    var name = '#song' + (i+1);
+    var song = $(name);
+
+    song.find('.song-name').text(obj.name);
+    song.find('.song-artist').text(obj.artist);
+    song.find('.song-album').text(obj.album);
+    song.find('.song-length').text(obj.duration);
+    addSongNameClickEvent(obj, i+1);  // Add click events to every row in the table.
+  }
+}
+
 $(document).ready(function() {
+  songs = playlists[0].playlist;
+
   if(!localStorage.getItem('name')) {     // If there is no song data previously stored in the browser's local storage...
     changeCurrentSongDetails(songs[0]);   // Load the details of the first song to the player controls.
     console.log('Local storage failed.');
@@ -114,16 +200,7 @@ $(document).ready(function() {
     $('.current-song-image').attr('src', 'img/' + localStorage.getItem('image'));
   }
 
-  for(var i=0; i<songs.length; ++i) {   // Populate the playlist table.
-    var obj = songs[i];
-    var name = '#song' + (i+1);
-    var song = $(name);
-    song.find('.song-name').text(obj.name);
-    song.find('.song-artist').text(obj.artist);
-    song.find('.song-album').text(obj.album);
-    song.find('.song-length').text(obj.duration);
-    addSongNameClickEvent(obj, i+1);
-  }
+  loadPlaylist();
   updateCurrentTime();
   setInterval(function() {
     updateCurrentTime();
@@ -158,6 +235,7 @@ function addSongNameClickEvent(song, position) {
   $(songId).on('click', function() {
     currentSongNumber = (position > 0 && position <= songs.length) ? position : ((position > songs.length) ? songs.length : 1);
     var audio = document.querySelector('audio');
+    console.log(audio.src);
     if(audio.src.search(fileName) != -1) {
       toggleSong();
     }
