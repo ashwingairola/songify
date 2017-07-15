@@ -46,6 +46,7 @@ var songs = [
   }
 ];
 
+// When the user 'logs in', hide the login page and reveal the dashboard.
 $('.welcome-screen button').on('click', function() {
   var name = $('#name-input').val();
   var email = $('#email-input').val();
@@ -58,16 +59,18 @@ $('.welcome-screen button').on('click', function() {
     $('body').css('padding-top', '40px');
     $('body').css('padding-bottom', '80px');
   }
-  else {
+  else {    // If login fails, display an error notification.
     $('#name-input').addClass('error');
     $('.alert-danger').removeClass('hidden');
   }
 });
 
+// When the user clicks on the play/pause icon, toggle the audio accordingly.
 $('.play-icon').on('click', function() {
   toggleSong();
 });
 
+// Toggle the song whenever the user presses the spacebar outside any input field.
 $('body').on('keypress', function(event) {
   if(event.keyCode == 32 && event.target.tagName != 'INPUT') {
     toggleSong();
@@ -91,15 +94,19 @@ function toggleSong() {
 // Update the current time of the song as well as the total duration of the song.
 function updateCurrentTime() {
   var song = document.querySelector('audio');
-  var currentTime = fancyTimeFormat(Math.floor(song.currentTime));
+  var currentTime = fancyTimeFormat(Math.floor(song.currentTime));  // Get the current time and the duration in HH:MM:SS format.
   var duration = fancyTimeFormat(Math.floor(song.duration));
-  $('.time-elapsed').text(currentTime);
-  $('.song-duration').text(duration);
+  $('.time-elapsed').text(currentTime); // Update the current time of the audio.
+  $('.song-duration').text(duration); // Update the duration of the audio.
 }
 
+// The following function runs when the page is loaded.
+// It is related to performing load-time tasks, such as loading the playlist, checking the local storage, etc.
 $(document).ready(function() {
+  // Update the number of songs in the playlist.
   $('#num-of-songs').text(songs.length);
 
+  // Load the song that was last played when the user closed/refreshed the page, by accessing the Local Storage of the browser.
   if(!localStorage.getItem('name')) {     // If there is no song data previously stored in the browser's local storage...
     changeCurrentSongDetails(songs[0]);   // Load the details of the first song to the player controls.
   }
@@ -114,7 +121,8 @@ $(document).ready(function() {
     $('.current-song-image').attr('src', 'img/' + localStorage.getItem('image'));
   }
 
-  for(var i=0; i<songs.length; ++i) {   // Populate the playlist table.
+  // Populate the playlist table.
+  for(var i=0; i<songs.length; ++i) {
     var obj = songs[i];
     var name = '#song' + (i+1);
     var song = $(name);
@@ -123,18 +131,19 @@ $(document).ready(function() {
     song.find('.song-artist').text(obj.artist);
     song.find('.song-album').text(obj.album);
     song.find('.song-length').text(obj.duration);
-    addSongNameClickEvent(obj, i+1);
+    addSongNameClickEvent(obj, i+1);    // Add click events to each song in the table.
   }
-  updateCurrentTime();
+  updateCurrentTime();  // Update the current time and duration on the player.
   setInterval(function() {
     updateCurrentTime();
   }, 1000);
 
-  $('#songs').DataTable({
+  $('#songs').DataTable({   // Initialise the DataTable.
     paging: false
   });
 });
 
+// This function returns the given time value in the HH:MM:SS format.
 function fancyTimeFormat(time) {
   // Hours, minutes and seconds
   var hrs = ~~(time / 3600);
@@ -153,23 +162,25 @@ function fancyTimeFormat(time) {
   return ret;
 }
 
+// This function adds click events to every song in the playlist table.
 function addSongNameClickEvent(song, position) {
   var songId = '#song' + position;
   var fileName = song.fileName;
   $(songId).on('click', function() {
     currentSongNumber = (position > 0 && position <= songs.length) ? position : ((position > songs.length) ? songs.length : 1);
     var audio = document.querySelector('audio');
-    if(audio.src.search(fileName) != -1) {
-      toggleSong();
+    if(audio.src.search(fileName) != -1) {  // If the name of the song is contained in the src value of the audio...
+      toggleSong();                         // Toggle the song.
     }
     else {
-      audio.src = fileName;
+      audio.src = fileName;                 // Otherwise set the src to the new fileName value and then play the song and update the player.
       toggleSong();
       changeCurrentSongDetails(song);
     }
   });
 }
 
+// This function changes the image, song name and album name displayed on the player whenever the current song is changed.
 function changeCurrentSongDetails(song) {
   $('.current-song-name').text(song.name);
   $('.current-song-album').text(song.album);
@@ -361,8 +372,10 @@ $('#my-file').on('change', function(event) {  // Triggered whenever we choose a 
   });
 });
 
+// This function is called whenever the user refreshes/closes the window.
+// It is meant to save the data of the current song in the Local Storage so that the same song plays when the user revisits the page.
 function saveSong() {
-  if(typeof(Storage) !== undefined) {
+  if(typeof(Storage) !== undefined) {   // If the browser supports localStorage, save the details of the current song in the localStorage object.
     var audio = document.querySelector('audio');
     var songObj = songs[currentSongNumber - 1];
     localStorage.setItem('name', songObj.name);
@@ -374,11 +387,13 @@ function saveSong() {
     localStorage.setItem('current-time', audio.currentTime);
     localStorage.setItem('current-song-number', currentSongNumber);
   }
-  else {
+  else {    // If localStorage is not supported, display an error message in the log.
     console.log('Web Storage not supported.');
   }
 }
 
+// WARNING! May not work on all browsers!
+// When the user refreshes/closes the window, save the details of the current song by calling saveSong() function.
 $(window).on('unload', function() {
   console.log('Saving song...');
   saveSong();
