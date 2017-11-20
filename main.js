@@ -308,7 +308,7 @@ $('.fa-microphone').on('click', function() {
 recognition.onresult = function(event) {
   var last = event.results.length - 1;
   var transcript = event.results[last][0].transcript;
-  // alert(transcript);
+  console.log(transcript);
   var song = document.querySelector('audio');
   if(song.paused && transcript.toUpperCase() === 'PLAY') {
     // $('.player-progress').hide();
@@ -317,7 +317,11 @@ recognition.onresult = function(event) {
     // alert("Is paused: " + song.paused);
     console.log("Is paused: " + song.paused);
   }
-  else if(transcript.toUpperCase() === 'PAUSE') {
+  else if(transcript.toUpperCase() === 'PAUSE' ||
+          transcript.toUpperCase() === 'PAWS' ||
+          transcript.toUpperCase() === 'POSE' ||
+          transcript.toUpperCase() === 'PAUJ' ||
+          transcript.toUpperCase() === 'POJ' || ) {
     // $('.player-progress').show();
     $('.play-icon').removeClass('fa-pause').addClass('fa-play');
     song.pause();
