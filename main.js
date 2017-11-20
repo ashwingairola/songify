@@ -311,7 +311,7 @@ recognition.onspeechstart = function() {
 
 recognition.onresult = function(event) {
   var last = event.results.length - 1;
-  var transcript = event.results[last][0].transcript;
+  var transcript = event.results[last][0].transcript.toUpperCase();
   console.log(last);
   console.log(transcript);
   var song = document.querySelector('audio');
@@ -322,12 +322,7 @@ recognition.onresult = function(event) {
     // alert("Is paused: " + song.paused);
     console.log("Is paused: " + song.paused);
   }
-  else if(transcript.toUpperCase() === 'PAUSE' ||
-          transcript.toUpperCase() === 'PAWS' ||
-          transcript.toUpperCase() === 'POSE' ||
-          transcript.toUpperCase() === 'PAUJ' ||
-          transcript.toUpperCase() === 'POJ' ||
-          transcript.toUpperCase() === 'STOP') {
+  else if(!song.paused && transcript === 'STOP') {
     // $('.player-progress').show();
     $('.play-icon').removeClass('fa-pause').addClass('fa-play');
     song.pause();
