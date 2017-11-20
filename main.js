@@ -326,7 +326,8 @@ recognition.onresult = function(event) {
           transcript.toUpperCase() === 'PAWS' ||
           transcript.toUpperCase() === 'POSE' ||
           transcript.toUpperCase() === 'PAUJ' ||
-          transcript.toUpperCase() === 'POJ') {
+          transcript.toUpperCase() === 'POJ' ||
+          transcript.toUpperCase() === 'STOP') {
     // $('.player-progress').show();
     $('.play-icon').removeClass('fa-pause').addClass('fa-play');
     song.pause();
