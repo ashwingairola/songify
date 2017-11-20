@@ -305,9 +305,14 @@ $('.fa-microphone').on('click', function() {
   console.log('Started!');
 });
 
+recognition.onspeechstart = function() {
+  console.log('Speech has been detected');
+}
+
 recognition.onresult = function(event) {
   var last = event.results.length - 1;
   var transcript = event.results[last][0].transcript;
+  console.log(last);
   console.log(transcript);
   var song = document.querySelector('audio');
   if(song.paused && transcript.toUpperCase() === 'PLAY') {
@@ -321,7 +326,7 @@ recognition.onresult = function(event) {
           transcript.toUpperCase() === 'PAWS' ||
           transcript.toUpperCase() === 'POSE' ||
           transcript.toUpperCase() === 'PAUJ' ||
-          transcript.toUpperCase() === 'POJ' || ) {
+          transcript.toUpperCase() === 'POJ') {
     // $('.player-progress').show();
     $('.play-icon').removeClass('fa-pause').addClass('fa-play');
     song.pause();
@@ -333,6 +338,14 @@ recognition.onresult = function(event) {
 recognition.onspeechend = function() {
   recognition.stop();
 };
+
+recognition.onnomatch = function() {
+  console.log('Speech not recognised');
+}
+
+recognition.onerror = function(event) {
+  console.log('Speech recognition error: ' + event.error);
+}
 
 // Code to play local files.
 var jsmediatags = window.jsmediatags; // Instantiate a jsmediatags object
