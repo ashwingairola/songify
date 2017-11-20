@@ -332,6 +332,7 @@ recognition.onresult = function(event) {
 };
 
 recognition.onspeechend = function() {
+  console.log('Speech ended')
   recognition.stop();
 };
 
@@ -341,6 +342,10 @@ recognition.onnomatch = function() {
 
 recognition.onerror = function(event) {
   console.log('Speech recognition error: ' + event.error);
+}
+
+recognition.onend = function() {
+  console.log('Speech recognition service disconnected');
 }
 
 // Code to play local files.
